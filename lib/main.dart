@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
               } else if (state is SensorDetailFailure) {
                 return const Text('Bad :(');
               } else if (state is SensorDetailLoaded) {
-                return Text('Length is ${state.sensorDetail.label}');
+                return Text('Название: ${state.sensorDetail.label}');
               } else {
                 return const Text('???');
               }
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () {
           BlocProvider.of<SettingsCubit>(context).setUrl('192.168.1.2:8080');
           BlocProvider.of<SensorDetailCubit>(context)
-              .getSensorDetail(sensorId: 3);
+              .updateSensorDetail(sensorId: 3, label: 'Крутой текст');
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),

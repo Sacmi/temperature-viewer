@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 import 'package:temperature_viewer/data/api/temperature_service_exception.dart';
 import 'package:temperature_viewer/data/model/sensor_data_request.dart';
+import 'package:temperature_viewer/data/model/sensor_detail_update.dart';
 
 class TemperatureServiceApiClient {
   final http.Client _httpClient;
@@ -20,7 +22,7 @@ class TemperatureServiceApiClient {
       throw SensorListRequestFailure();
     }
 
-    return jsonDecode(utf8.decode(sensorsResponse.bodyBytes));
+    return _toJSON(sensorsResponse.bodyBytes);
   }
 
   Future<List<dynamic>> getRawSensorData(
@@ -34,7 +36,7 @@ class TemperatureServiceApiClient {
       throw SensorDataRequestFailure();
     }
 
-    return jsonDecode(utf8.decode(dataResponse.bodyBytes));
+    return _toJSON(dataResponse.bodyBytes);
   }
 
   Future<dynamic> getRawSensorDetail(String url, int sensorId) async {
@@ -45,6 +47,22 @@ class TemperatureServiceApiClient {
       throw SensorDetailRequestFailure();
     }
 
-    return jsonDecode(utf8.decode(sensorResponse.bodyBytes));
+    return _toJSON(sensorResponse.bodyBytes);
+  }
+
+  _toJSON(Uint8List bodyBytes) => jsonDecode(utf8.decode(bodyBytes));
+
+  Future<dynamic> updateRawSensorDetail(
+      String url, int sensorId, SensorDetailUpdate update) async {
+    final uri = _getUri(url, '/sensor/$sensorId');
+    final sensorResponse = await _httpClient.post(uri,
+        headers: {'Content-Type': 'application/json'},
+        body: utf8.encode(update.toJson()));
+
+    if (sensorResponse.statusCode != 200) {
+      throw SensorUpdateRequestFailure();
+    }
+
+    return _toJSON(sensorResponse.bodyBytes);
   }
 }
