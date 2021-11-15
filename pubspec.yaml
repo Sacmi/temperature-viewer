@@ -30,12 +30,18 @@ dependencies:
   bloc: ^7.2.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.3
+  firebase_core: ^1.10.0
+  firebase_messaging: ^11.1.0
   flutter:
     sdk: flutter
   flutter_bloc: ^7.3.3
+  flutter_local_notifications: ^9.1.2
+  graphic: ^0.4.1
   http: ^0.13.4
   hydrated_bloc: ^7.1.0
+  intl: ^0.17.0
   path_provider: ^2.0.6
+  routemaster: ^0.9.5
 
 dev_dependencies:
   bloc_test: ^8.5.0

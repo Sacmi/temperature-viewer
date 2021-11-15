@@ -17,15 +17,19 @@ class SensorDetailCubit extends Cubit<SensorDetailState> {
   String? url;
 
   SensorDetailCubit({required this.settingsCubit})
-      : super(SensorDetailLoading()) {
+      : super(SensorDetailInitialLoading()) {
+    url = settingsCubit.state.url;
+
     _settingsCubitSubscription = settingsCubit.stream.listen((state) {
       url = state.url;
     });
   }
 
   void getSensorDetail({required int sensorId}) async {
-    if (url == null) return emit(SensorDetailFailure());
-
+    if (url == null) {
+      emit(SensorDetailFailure());
+      return;
+    }
     emit(SensorDetailLoading());
 
     try {

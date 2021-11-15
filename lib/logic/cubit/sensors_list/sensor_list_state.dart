@@ -7,10 +7,11 @@ abstract class SensorListState extends Equatable {
   List<Object> get props => [];
 }
 
-class SensorListLoading extends SensorListState {
-  @override
-  List<Object> get props => [];
-}
+class SensorListLoading extends SensorListState {}
+
+class SensorListInitialLoading extends SensorListLoading {}
+
+class SensorListFailure extends SensorListState {}
 
 class SensorListLoaded extends SensorListState {
   final List<Sensor> sensors;
@@ -19,9 +20,4 @@ class SensorListLoaded extends SensorListState {
 
   @override
   List<Object> get props => [sensors];
-}
-
-class SensorListFailure extends SensorListState {
-  @override
-  List<Object> get props => [];
 }

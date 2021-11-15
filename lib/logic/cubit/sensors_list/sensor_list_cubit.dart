@@ -3,9 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:temperature_viewer/data/model/sensor.dart';
-import 'package:temperature_viewer/logic/cubit/settings/settings_cubit.dart';
-
 import 'package:temperature_viewer/data/repository/sensor_list_repository.dart';
+import 'package:temperature_viewer/logic/cubit/settings/settings_cubit.dart';
 
 part 'sensor_list_state.dart';
 
@@ -16,7 +15,10 @@ class SensorListCubit extends Cubit<SensorListState> {
 
   String? url;
 
-  SensorListCubit({required this.settingsCubit}) : super(SensorListLoading()) {
+  SensorListCubit({required this.settingsCubit})
+      : super(SensorListInitialLoading()) {
+    url = settingsCubit.state.url;
+
     _settingsCubitSubscription = settingsCubit.stream.listen((state) {
       url = state.url;
     });
@@ -30,7 +32,7 @@ class SensorListCubit extends Cubit<SensorListState> {
     try {
       final sensorList = await _sensorListRepository.getSensorList(url!);
       emit(SensorListLoaded(sensors: sensorList));
-    } on Exception {
+    } catch (_) {
       emit(SensorListFailure());
     }
   }

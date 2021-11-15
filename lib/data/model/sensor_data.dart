@@ -18,7 +18,7 @@ class SensorData {
 
   factory SensorData.fromMap(Map<String, dynamic> map) {
     return SensorData(
-        timestamp: DateTime.parse(map['timestamp']),
+        timestamp: DateTime.parse(map['timestamp']).toLocal(),
         id: map['id'],
         temperature: map['temperature']);
   }

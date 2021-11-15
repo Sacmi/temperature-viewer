@@ -9,6 +9,8 @@ abstract class SensorDetailState extends Equatable {
 
 class SensorDetailLoading extends SensorDetailState {}
 
+class SensorDetailInitialLoading extends SensorDetailLoading {}
+
 class SensorDetailLoaded extends SensorDetailState {
   final SensorDetail sensorDetail;
 

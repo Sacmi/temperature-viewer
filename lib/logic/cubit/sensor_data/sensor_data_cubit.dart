@@ -16,7 +16,10 @@ class SensorDataCubit extends Cubit<SensorDataState> {
 
   String? url;
 
-  SensorDataCubit({required this.settingsCubit}) : super(SensorDataLoading()) {
+  SensorDataCubit({required this.settingsCubit})
+      : super(SensorDataInitialLoading()) {
+    url = settingsCubit.state.url;
+
     _settingsCubitSubscription = settingsCubit.stream.listen((state) {
       url = state.url;
     });
@@ -32,7 +35,7 @@ class SensorDataCubit extends Cubit<SensorDataState> {
       final sensorData = await _repository.getSensorData(
           url!, sensorId, SensorDataRequest(from: from, to: to));
 
-      emit(SensorDataLoaded(sensorData: sensorData));
+      emit(SensorDataLoaded(sensorData: sensorData, from: from, to: to));
     } on Exception {
       emit(SensorDataFailure());
     }

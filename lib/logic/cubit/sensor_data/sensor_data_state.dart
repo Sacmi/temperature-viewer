@@ -9,12 +9,15 @@ abstract class SensorDataState extends Equatable {
 
 class SensorDataLoading extends SensorDataState {}
 
+class SensorDataInitialLoading extends SensorDataLoading {}
+
 class SensorDataLoaded extends SensorDataState {
   final List<SensorData> sensorData;
 
-  const SensorDataLoaded({
-    required this.sensorData,
-  });
+  const SensorDataLoaded({required this.sensorData, this.from, this.to});
+
+  final DateTime? from;
+  final DateTime? to;
 
   @override
   List<Object> get props => [sensorData];

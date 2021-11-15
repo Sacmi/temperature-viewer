@@ -12,9 +12,11 @@ class TemperatureServiceApiClient {
   TemperatureServiceApiClient({http.Client? client})
       : _httpClient = client ?? http.Client();
 
-  Uri _getUri(String url, String path) => Uri.http(url, path);
+  Uri _getUri(String url, String path,
+          {Map<String, dynamic>? queryParameters}) =>
+      Uri.http(url, path, queryParameters);
 
-  Future<List<Map<String, dynamic>>> getRawSensorsList(String url) async {
+  Future<dynamic> getRawSensorsList(String url) async {
     final uri = Uri.http(url, '/sensor/');
     final sensorsResponse = await _httpClient.get(uri);
 
@@ -29,7 +31,10 @@ class TemperatureServiceApiClient {
       String url, int sensorId, SensorDataRequest? params) async {
     final uri = params == null
         ? _getUri(url, '/reading/$sensorId')
-        : _getUri(url, '/reading/$sensorId/filter?$params');
+        : _getUri(url, '/reading/$sensorId/filter', queryParameters: {
+            'from': params.from?.toUtc().toIso8601String(),
+            'to': params.to?.toUtc().toIso8601String()
+          });
     final dataResponse = await _httpClient.get(uri);
 
     if (dataResponse.statusCode != 200) {
