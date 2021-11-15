@@ -6,7 +6,7 @@ import 'package:temperature_viewer/logic/cubit/sensor_detail/sensor_detail_cubit
 import 'package:temperature_viewer/logic/cubit/sensors_list/sensor_list_cubit.dart';
 import 'package:temperature_viewer/logic/cubit/settings/settings_cubit.dart';
 import 'package:temperature_viewer/presentation/view/sensor_data_view.dart';
-import 'package:temperature_viewer/presentation/view/sensor_detail.dart';
+import 'package:temperature_viewer/presentation/view/sensor_detail_view.dart';
 import 'package:temperature_viewer/presentation/view/sensor_list_view.dart';
 import 'package:temperature_viewer/presentation/view/settings_view.dart';
 

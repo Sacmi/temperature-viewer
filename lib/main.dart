@@ -17,7 +17,7 @@ void main() async {
   initializeDateFormatting('ru_RU', null);
 
   final cloudMessaging = CloudMessaging();
-  await cloudMessaging.initialize();
+  cloudMessaging.initialize();
 
   runApp(MyApp());
 }

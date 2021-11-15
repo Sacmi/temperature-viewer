@@ -19,15 +19,20 @@ class SettingsView extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          TextField(
-            controller: textController,
-            decoration: const InputDecoration(labelText: 'Хост'),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: textController,
+              decoration: const InputDecoration(labelText: 'Хост'),
+            ),
           ),
-          ElevatedButton(
-              onPressed: () {
-                settingsCubit.setUrl(textController.text);
-              },
-              child: const Text('Save'))
+          ListTile(
+            title: const Text('Сохранить'),
+            leading: const Icon(Icons.save),
+            onTap: () {
+              settingsCubit.setUrl(textController.text);
+            },
+          ),
         ],
       ),
     );
