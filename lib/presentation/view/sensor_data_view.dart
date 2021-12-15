@@ -32,6 +32,12 @@ class SensorDataView extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else if (state is SensorDataLoaded) {
+            if (state.sensorData.length < 2) {
+              return const Center(
+                child: Text("Мало данных для построения графика"),
+              );
+            }
+
             return ListView(
               children: [
                 ListTile(

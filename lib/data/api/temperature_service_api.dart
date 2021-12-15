@@ -14,10 +14,12 @@ class TemperatureServiceApiClient {
 
   Uri _getUri(String url, String path,
           {Map<String, dynamic>? queryParameters}) =>
-      Uri.http(url, path, queryParameters);
+      url.contains('http://')
+          ? Uri.http(url, path, queryParameters)
+          : Uri.https(url, path, queryParameters);
 
   Future<dynamic> getRawSensorsList(String url) async {
-    final uri = Uri.http(url, '/sensor/');
+    final uri = _getUri(url, '/sensor/');
     final sensorsResponse = await _httpClient.get(uri);
 
     if (sensorsResponse.statusCode != 200) {

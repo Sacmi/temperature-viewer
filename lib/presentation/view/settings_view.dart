@@ -23,7 +23,8 @@ class SettingsView extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: textController,
-              decoration: const InputDecoration(labelText: 'Хост'),
+              decoration:
+                  const InputDecoration(labelText: 'Хост (с протоколом)'),
             ),
           ),
           ListTile(

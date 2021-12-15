@@ -36,7 +36,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^7.3.3
   flutter_local_notifications: ^9.1.2
-  graphic: ^0.4.1
+  graphic: ^0.6.0
   http: ^0.13.4
   hydrated_bloc: ^7.1.0
   intl: ^0.17.0
